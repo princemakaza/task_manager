@@ -1,4 +1,7 @@
 package com.veri.full_stack_developer_test_backend.task;
 
-public class TaskStatus {
+
+public enum TaskStatus {
+    PENDING,
+    COMPLETED
 }
