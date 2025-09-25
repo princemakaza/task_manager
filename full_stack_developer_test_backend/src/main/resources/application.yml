@@ -28,3 +28,11 @@ logging:
 jwt:
   secret: "change-me-to-a-256-bit-secret-string"
   expiration: 3600000
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui
+    try-it-out-enabled: true
+    operationsSorter: method
+    tagsSorter: alpha
+    filter: true
