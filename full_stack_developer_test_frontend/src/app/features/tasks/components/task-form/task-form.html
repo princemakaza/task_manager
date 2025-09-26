@@ -1,0 +1,31 @@
+<form class="tform" (ngSubmit)="submit()" [formGroup]="form">
+  <div>
+    <label class="tform__label">Title</label>
+    <input
+      class="tform__input"
+      type="text"
+      formControlName="title"
+      placeholder="Deploy the application" />
+    <div class="tform__error" *ngIf="form.controls['title'].touched && form.controls['title'].invalid">
+      Title is required (max 140 chars).
+    </div>
+  </div>
+
+  <div>
+    <label class="tform__label">Description</label>
+    <textarea class="tform__textarea" rows="3" formControlName="description"></textarea>
+  </div>
+
+  <div>
+    <label class="tform__label">Status</label>
+    <select class="tform__select" formControlName="status">
+      <option value="PENDING">PENDING</option>
+      <option value="COMPLETED">COMPLETED</option>
+    </select>
+  </div>
+
+  <div class="tform__actions">
+    <button type="submit" class="btn btn--primary">Save</button>
+    <button type="button" class="btn btn--outline" (click)="cancel.emit()">Cancel</button>
+  </div>
+</form>

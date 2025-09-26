@@ -1,0 +1,37 @@
+<div class="tlist">
+  <table class="tlist__table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Status</th>
+        <th class="tlist__th--actions"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tasks">
+        <td>
+          <div class="tlist__title">{{ t.title }}</div>
+          <div class="tlist__desc" *ngIf="t.description">{{ t.description }}</div>
+        </td>
+        <td>
+          <span class="badge"
+                [class.badge--pending]="t.status === 'PENDING'"
+                [class.badge--completed]="t.status === 'COMPLETED'">
+            {{ t.status }}
+          </span>
+        </td>
+        <td class="actions">
+          <button class="btn btn--ghost" (click)="edit.emit(t)">Edit</button>
+          <button class="btn btn--ghost"
+                  (click)="toggle.emit({ id: t.id, status: t.status === 'PENDING' ? 'COMPLETED' : 'PENDING' })">
+            Toggle
+          </button>
+          <button class="btn btn--danger" (click)="remove.emit(t.id)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="loading" class="tlist__meta">Loading…</div>
+  <div *ngIf="!loading && tasks.length === 0" class="tlist__meta">No tasks yet.</div>
+</div>

@@ -1,0 +1,41 @@
+<section class="page">
+  <div class="page__header">
+    <h2 class="page__title">Your Tasks</h2>
+
+    <div class="page__actions">
+      <button class="btn btn--primary" (click)="startCreate()">New Task</button>
+      <button class="btn btn--outline" (click)="logout()">Logout</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <app-task-list
+      [tasks]="(tasks$ | async) ?? []"
+      [loading]="(loading$ | async) ?? false"
+      (edit)="startEdit($event)"
+      (toggle)="toggleStatus($event)"
+      (remove)="delete($event)">
+    </app-task-list>
+  </div>
+
+  <div class="alert alert--error" *ngIf="(error$ | async) as err">
+    {{ err?.message || 'An error occurred.' }}
+  </div>
+</section>
+
+<!-- Modal form -->
+<div class="modal" *ngIf="showForm">
+  <div class="modal__backdrop" (click)="cancel()"></div>
+  <div class="modal__dialog">
+    <div class="modal__header">
+      <h3 class="modal__title">{{ editing ? 'Edit task' : 'Create task' }}</h3>
+      <button type="button" class="btn btn--sm btn--ghost" (click)="cancel()">Close</button>
+    </div>
+
+    <app-task-form
+      [task]="editing"
+      (save)="save($event)"
+      (cancel)="cancel()">
+    </app-task-form>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* global tweaks (optional) */
+:root { color-scheme: light dark; }
